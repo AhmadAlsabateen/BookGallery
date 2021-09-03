@@ -6,6 +6,7 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+import com.amazonaws.util.IOUtils;
 import com.gallery.dao.AuthorDao;
 import com.gallery.dao.BookDao;
 import com.gallery.dao.CategoryDao;
@@ -68,7 +69,7 @@ public class BookManagementService {
             connection.setDoOutput(true);
             connection.setRequestMethod("PUT");
             OutputStream out = connection.getOutputStream();
-            out.write(pdf.readAllBytes());
+            out.write(IOUtils.toByteArray(pdf));
             out.close();
 
             // Check the HTTP response code. To complete the upload and make the object available,
