@@ -70,6 +70,7 @@ public class BookManagementService {
             connection.setRequestMethod("PUT");
             OutputStream out = connection.getOutputStream();
             out.write(IOUtils.toByteArray(pdf));
+
             out.close();
 
             // Check the HTTP response code. To complete the upload and make the object available,
