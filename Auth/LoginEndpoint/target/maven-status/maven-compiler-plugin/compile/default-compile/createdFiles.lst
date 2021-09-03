@@ -1,0 +1,6 @@
+com\gallery\controllers\SignUpServlet.class
+services\LoginService.class
+com\gallery\controllers\LoginServlet.class
+services\RegistrationService.class
+com\gallery\controllers\LogoutServlet.class
+com\gallery\controllers\exception\InvalidCredentials.class

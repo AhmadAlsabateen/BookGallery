@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="DBConnection" />
+        <module name="AdminService" />
+        <module name="GalleryCommonDAO" />
+        <module name="S3Management" />
+        <module name="GalleryCommon" />
+        <module name="UserService" />
+        <module name="LoginEndpoint" />
+        <module name="AuthService" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BooksManagement" target="16" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
