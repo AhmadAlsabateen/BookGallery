@@ -103,8 +103,6 @@
                             <workingDirectory>${project.basedir}</workingDirectory>
                             <arguments>
                                 <argument>build</argument>
-                                <argument>-t</argument>
-                                <argument>admin-service</argument>
                                 <argument>.</argument>
                             </arguments>
                         </configuration>
