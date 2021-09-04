@@ -70,6 +70,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
+
                 <executions>
                     <!-- Remove existing image from local repo -->
                     <execution>
@@ -85,6 +86,10 @@
                                 <argument>rmi</argument>
                                 <argument>admin-service</argument>
                             </arguments>
+                            <successCodes>
+                                <successCode>0</successCode>
+                                <successCode>1</successCode>
+                            </successCodes>
                         </configuration>
                     </execution>
 
