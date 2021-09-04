@@ -104,7 +104,7 @@
                             <arguments>
                                 <argument>build</argument>
                                 <argument>-t</argument>
-                                <argument><lowercase>${project.groupId}/${project.artifactId}:${project.version}</lowercase></argument>
+                                <argument>admin-service</argument>
                                 <argument>.</argument>
                             </arguments>
                         </configuration>
