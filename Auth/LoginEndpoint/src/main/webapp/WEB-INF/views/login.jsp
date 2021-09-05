@@ -10,7 +10,7 @@
 
     <p><font color="red">${signUpErrorMessage}</font></p>
         <form action="./signup" method="POST" align="center">
-            Name : <input name="username" type="text" /> Password : <input name="password" type="password" />
+            NameAhmad : <input name="username" type="text" /> Password : <input name="password" type="password" />
              Password2 : <input name="password2" type="password" /><input type="submit" />
         </form>
 
