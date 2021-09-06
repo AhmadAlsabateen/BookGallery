@@ -14,6 +14,10 @@ public class LoginService {
         return new LoginService();
     }
     public String getRole(String username,String password){
+
+        System.out.println("User name :"+username);
+        System.out.println("password :"+password);
+
         Filter filter = new Filter();
         UserDao userDao= UserDao.getInstance();
         filter.fields.put("username",username);
