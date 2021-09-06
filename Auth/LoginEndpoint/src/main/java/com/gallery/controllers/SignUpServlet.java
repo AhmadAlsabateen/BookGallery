@@ -19,10 +19,15 @@ public class SignUpServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String password2 = request.getParameter("password2");
+            System.out.println("Sign up  user name: " + username);
+            System.out.println("Sign up  pass1: " + password);
+            System.out.println("Sign up  pass2: " + password2);
+
             try {
                 RegistrationService registrationService = RegistrationService.getInstance();
                 registrationService.registerUser(username, password, password2, "user");
             } catch (InvalidCredentials e) {
+                e.printStackTrace();
                 request.setAttribute("signUpErrorMessage", "password don't mach password2!!");
                 request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
             }
@@ -30,6 +35,7 @@ public class SignUpServlet extends HttpServlet {
             session.setAttribute("role", "user");
             response.sendRedirect("/User/userHome");
         } else {
+            System.out.println("Invalid Sign up request : " +request.getParameterMap().toString());
             request.setAttribute("signUpErrorMessage", "Invalid Credentials!!");
             request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }

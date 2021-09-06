@@ -42,6 +42,7 @@ public class DatabaseConnection {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Execute query returned null " );
 
         return null;
     }

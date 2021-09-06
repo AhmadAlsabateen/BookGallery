@@ -23,6 +23,7 @@ public class RegistrationService {
             UserDao userDao = UserDao.getInstance();
             userDao.create(input);
         } else {
+            System.out.println("Passwords does not match");
             throw new InvalidCredentials();
         }
     }
