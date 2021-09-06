@@ -35,7 +35,7 @@
       <FORM METHOD="GET" ACTION="/User/userHome" align="center">
 <table border="1" cellpadding="5" align="center">
             <tr>
-                <th>Name</th>
+                <th>NameOfBook</th>
                 <th>Author</th>
                 <th>Category</th>
             </tr>
