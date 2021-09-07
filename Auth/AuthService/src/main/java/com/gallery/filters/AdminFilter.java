@@ -20,8 +20,9 @@ public class AdminFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
         HttpSession session = httpRequest.getSession(false);
+
         String role = (String) session.getAttribute("role");
-        if (role.equals("admin")) {
+        if (session != null &&role.equals("admin")) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             httpResponse.sendError(401);

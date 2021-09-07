@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>com.gallery</groupId>
+            <artifactId>AuthService</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gallery</groupId>
             <artifactId>GalleryCommon</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
