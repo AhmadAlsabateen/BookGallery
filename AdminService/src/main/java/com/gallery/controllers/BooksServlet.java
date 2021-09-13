@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gallery.service.BookManagementService;
 import services.BookService;
 import services.beans.BookBean;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -57,7 +56,6 @@ public class BooksServlet extends HttpServlet {
             String categoryPart = IOUtils.toString(request.getPart("Category").getInputStream());
             String authorPart = IOUtils.toString(request.getPart("Author").getInputStream());
             InputStream filePart = request.getPart("File").getInputStream();
-
             bookManagementService.saveBook(namePart, categoryPart, authorPart, filePart);
             response.sendRedirect("/Admin/adminHome");
 

@@ -23,6 +23,7 @@ public class AuthFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
         boolean isLoggedIn = (session != null && session.getAttribute("logged") != null);
         boolean isLoginRequest = httpRequest.getRequestURI().equals("/Auth/login");
+        boolean isSignRequest = httpRequest.getRequestURI().equals("/Auth/signup");
 
 
         if (isLoggedIn && isLoginRequest) {
@@ -37,7 +38,7 @@ public class AuthFilter implements Filter {
                 httpResponse.sendRedirect("/Admin/adminHome");
             }
 
-        } else if (!isLoggedIn && !isLoginRequest) {
+        } else if (!isLoggedIn && !isLoginRequest && !isSignRequest) {
 
             // the user is not logged in, and the requested page requires
             // authentication, then forward to the login page

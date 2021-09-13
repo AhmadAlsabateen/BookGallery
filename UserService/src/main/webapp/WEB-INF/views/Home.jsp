@@ -31,7 +31,7 @@
    <title>BooksGallery</title>
   </head>
   <body>
-
+<a href="/Auth/logout">logout</a>
       <FORM METHOD="GET" ACTION="/User/userHome" align="center">
 <table border="1" cellpadding="5" align="center">
             <tr>

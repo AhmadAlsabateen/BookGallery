@@ -11,7 +11,7 @@ import java.net.Socket;
 
 public class DatabaseConnection {
     private static final int PORT = 80;
-    private static final String IP = "db-service-entrypoint";
+    private static final String IP = "localhost";
     ObjectMapper objectMapper;
     private Socket clientSocket;
     private PrintWriter out;
@@ -29,6 +29,7 @@ public class DatabaseConnection {
     }
 
     public static DatabaseConnection getInstance() {
+
         return new DatabaseConnection();
     }
 
