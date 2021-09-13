@@ -73,6 +73,7 @@
    <title>BooksGallery</title>
   </head>
   <body>
+  <a href="/Auth/logout">logout</a>
        <div id="Modal" class="modal">
          <!-- Modal content -->
          <div class="modal-content">

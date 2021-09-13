@@ -20,11 +20,11 @@ public class LoginServlet  extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(
                 request, response);
     }
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginService loginService = LoginService.getInstance();
         try {
-
             String role = loginService.getRole(request.getParameter("username"), request.getParameter("password"));
             HttpSession session= request.getSession(false);
             session.setAttribute("role",role);
