@@ -7,11 +7,13 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.util.IOUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gallery.dao.AuthorDao;
 import com.gallery.dao.BookDao;
 import com.gallery.dao.CategoryDao;
 import com.gallery.entities.Author;
 import com.gallery.entities.Category;
+import com.gallery.query.Filter;
 import com.gallery.query.Input;
 
 import java.io.IOException;
@@ -29,6 +31,42 @@ public class BookManagementService {
     public static BookManagementService getInstance() {
         return new BookManagementService();
     }
+
+    public void updateBook(long id,String name, String category, String author, InputStream pdf,long pdfSize) throws JsonProcessingException {
+        BookDao bookDao = BookDao.getInstance();
+        Filter filter= new Filter();
+        filter.fields.put("id",id);
+        Input input= new Input();
+        if (!category.equals("")){
+        Long categoryID=getCategoryId(category);
+        input.fields.put("categeryId",categoryID);
+        }
+        if (!author.equals("")){
+        Long authorId=getAuthorId(author);
+        input.fields.put("authorId",authorId);
+        }
+
+        if (!name.equals("")){
+        input.fields.put("name",name);
+        }
+
+        if (pdfSize!=0){
+            System.out.println(pdfSize);
+            String key = getFileKey(id);
+            uploadtoS3(pdf,key);
+        }
+        bookDao.update(filter,input);
+
+    }
+
+    private String getFileKey(long id) throws JsonProcessingException {
+        BookDao bookDao= BookDao.getInstance();
+        Filter filter= new Filter();
+        filter.fields.put("id",id);
+        String key= bookDao.getByFilter(filter).get(0).fileName;
+        return key;
+    }
+
 
     public void saveBook(String name, String category, String author, InputStream pdf) {
         String fileName = category + " - " + author + " - " + name+".pdf";

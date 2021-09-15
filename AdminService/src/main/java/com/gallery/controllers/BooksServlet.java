@@ -34,9 +34,6 @@ public class BooksServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
-        System.out.println(request.getAttribute("books"));
-
         try {
             request.getRequestDispatcher("/WEB-INF/views/Home.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
@@ -72,6 +69,22 @@ public class BooksServlet extends HttpServlet {
     public void doPut(HttpServletRequest request, HttpServletResponse response) {
 
 
+        try {
+            if (isUpdateRequest(request)) {
+                BookManagementService bookManagementService=BookManagementService.getInstance();
+                String namePart = IOUtils.toString(request.getPart("Name").getInputStream());
+                String categoryPart = IOUtils.toString(request.getPart("Category").getInputStream());
+                String authorPart = IOUtils.toString(request.getPart("Author").getInputStream());
+                Long bookId = Long.parseLong(IOUtils.toString(request.getPart("bookId").getInputStream()));
+                InputStream filePart = request.getPart("File").getInputStream();
+                long size=request.getPart("File").getSize();
+                bookManagementService.updateBook(bookId, namePart, categoryPart, authorPart, filePart,size);
+            }
+        } catch (IOException | ServletException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override
@@ -86,6 +99,13 @@ public class BooksServlet extends HttpServlet {
                 request.getParameterMap().containsKey("Category")) &&
                 (request.getParameter("Name") != "" || request.getParameter("Author") != "" ||
                         request.getParameter("Category") != ""));
+    }
+    private boolean isUpdateRequest(HttpServletRequest request) throws ServletException, IOException {
+        return ((!request.getPart("Name").getInputStream().equals("") ||
+                 !request.getPart("Author").getInputStream().equals("") ||
+                 !request.getPart("Category").getInputStream().equals("")||
+                 !request.getPart("id").getInputStream().equals("")||
+                  request.getPart("File").getSize()!=0));
     }
 
 

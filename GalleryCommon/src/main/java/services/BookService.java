@@ -46,14 +46,15 @@ public class BookService {
         Filter filter = new Filter();
 
         if (author != "") {
-            Long authorID = AuthorDao.getInstance().getByName(author).getId();
-            if (authorID != null)
+            if (AuthorDao.getInstance().getByName(author)!= null){
+                Long authorID = AuthorDao.getInstance().getByName(author).getId();
                 filter.fields.put("authorId", authorID);
+            }
         }
 
         if (category != "") {
-            Long categoryID = CategoryDao.getInstance().getByName(category).getId();
-            if (categoryID != null) {
+            if (CategoryDao.getInstance().getByName(category) != null) {
+                Long categoryID = CategoryDao.getInstance().getByName(category).getId();
                 filter.fields.put("categeryId", categoryID);
             }
         }
@@ -61,14 +62,12 @@ public class BookService {
         if (name != "") {
             filter.fields.put("name", name);
         }
-
-        List<Book> books = BookDao.getInstance().getByFilter(filter);
-
-
         ArrayList<BookBean> result = new ArrayList<>();
-
-        for (Book dbBook : books) {
-            result.add(buildBook(dbBook));
+        if (filter.fields.containsKey("categeryId")||filter.fields.containsKey("authorId")||filter.fields.containsKey("name")){
+        List<Book> books = BookDao.getInstance().getByFilter(filter);
+            for (Book dbBook : books) {
+                result.add(buildBook(dbBook));
+            }
         }
 
         return result;

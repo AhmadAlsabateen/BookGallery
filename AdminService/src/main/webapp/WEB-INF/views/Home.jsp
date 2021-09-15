@@ -5,27 +5,8 @@
 
 <html>
   <head>
-       <script>
-           function downloadBook(element) {
-                let bookId = element.getAttribute('data-id');
-                let url =  window.location.protocol + "//" + window.location.host+'/S3Management/download?bookId='+bookId;
-                let xmlHttp = new XMLHttpRequest();
-                xmlHttp.onreadystatechange = function() {
-                           if (this.readyState === this.DONE) {
-                                   let downloadURL = xmlHttp.responseText;
-                                   var link = document.createElement("a");
-                                   link.setAttribute('download', '');
-                                   link.href = downloadURL;
-                                   document.body.appendChild(link);
-                                   link.click();
-                                   link.remove();
-                           }
-                       }
-                xmlHttp.open('GET', url);
-                xmlHttp.send();
-           }
-      </script>
-	  
+
+
       <style>
       body {font-family: Arial, Helvetica, sans-serif;}
 
@@ -69,6 +50,7 @@
       }
       </style>
 
+
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <title>BooksGallery</title>
   </head>
@@ -97,6 +79,30 @@
 		   </form>
          </div>
        </div>
+
+       <div id="Edit" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span id="edit-span" class="close">&times;</span>
+                  <table id="editTbl" border ="1" width="500" align="center">
+                     <tr bgcolor="00FF7F">
+                     <th><b>Author</b></th>
+                     <th><b>Category Name</b></th>
+                     <th><b>Name</b></th>
+                     <th><b>File</b></th>
+                     </tr>
+                     <tr>
+                     <td><input id="1" type="text" name="Author"</td>
+                     <td><input id="2" type="text" name="Category"</td>
+                     <td><input id="3" type="text" name="Name"</td>
+                     <td><input id="4" type="file" name="File"</td>
+                     <td><input id="5" id="submitEdit" type="button" value="edit"onClick="editRequest(this)"></td>
+                     </tr>
+                  </table>
+                </div>
+              </div>
+
+
       <div>
           <FORM METHOD="GET" ACTION="/Admin/adminHome" align="center">
             <table border="1" cellpadding="5" align="center">
@@ -136,41 +142,106 @@
                 <td><%=book.category.name%></td>
                 <td><%=book.name%></td>
                 <td><a data-id="<%=book.id%>" onClick="downloadBook(this)">download</a></td>
-                <td><a href="/booksgallery/getfile?id=<%=book.id%>">Edit</a></td>
-                <td><a href="/booksgallery/getfile?id=<%=book.id%>">Delete</a></td>
+                <td><input id="edit-button" type="button" value="Edit" data-bookid="<%=book.id%>"></td>
+                <td><input type="button" value="Delete" data-bookid="<%=book.id%>"></td>
             </tr>
             <%}%>
         </table>
 <% } %>
 
-
-        <script>
-            // Get the modal
-            var modal = document.getElementById("Modal");
-
-            // Get the button that opens the modal
-            var btn = document.getElementById("add-book");
-
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-
-            // When the user clicks the button, open the modal
-            btn.onclick = function() {
-              modal.style.display = "block";
-            }
-
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
-              modal.style.display = "none";
-            }
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-              if (event.target == modal) {
-                modal.style.display = "none";
-              }
-            }
-        </script>
     </body>
+
+    <script>
+
+               function downloadBook(element) {
+                    let bookId = element.getAttribute('data-id');
+                    let url =  window.location.protocol + "//" + window.location.host+'/S3Management/download?bookId='+bookId;
+                    let xmlHttp = new XMLHttpRequest();
+                    xmlHttp.onreadystatechange = function() {
+                               if (this.readyState === this.DONE) {
+                                       let downloadURL = xmlHttp.responseText;
+                                       var link = document.createElement("a");
+                                       link.setAttribute('download', '');
+                                       link.href = downloadURL;
+                                       document.body.appendChild(link);
+                                       link.click();
+                                       link.remove();
+                               }
+                           }
+                    xmlHttp.open('GET', url);
+                    xmlHttp.send();
+               }
+
+                // Get the modal
+                var modal = document.getElementById("Modal");
+
+                // Get the button that opens the modal
+                var btn = document.getElementById("add-book");
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks the button, open the modal
+                btn.onclick = function() {
+                  modal.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                  modal.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                  if (event.target == modal) {
+                    modal.style.display = "none";
+                  }
+                }
+
+                var editForm=document.getElementById("Edit");
+                var editSpan=document.getElementById("edit-span");
+                var editBtn= document.getElementById("edit-button");
+                editBtn.onclick = function(element) {
+                                  var editTbl=document.getElementById("editTbl");
+                                  var i = document.createElement("input");
+                                  i.id="6";
+                                  i.type = "hidden";
+                                  i.name = "book-id";
+                                  i.value = editBtn.getAttribute("data-bookid");
+                                  editTbl.appendChild(i);
+                                  editForm.style.display = "block";
+                                }
+
+                editSpan.onclick = function() {
+                                  editForm.style.display = "none";
+                                }
+
+                 window.onclick = function(event) {
+                     if (event.target == editForm) {
+                     editForm.style.display = "none";
+                      }}
+                  var editSubmit= document.getElementById("submitEdit");
+                  
+                   function editRequest (element) {
+                                  var Author = document.getElementById("1").value;
+								  var Category = document.getElementById("2").value;
+								  var Name = document.getElementById("3").value;
+								  var File = document.getElementById("4").files[0];
+								  var bookId = document.getElementById("6").value;
+								  console.log(File);
+                                  var formData = new FormData();
+								  formData.append("Author", Author);
+								  formData.append("Category", Category);
+								  formData.append("Name", Name);
+								  formData.append("File", File);
+								  formData.append("bookId",bookId);
+								  var request = new XMLHttpRequest();
+								  let url =  window.location.protocol + "//" + window.location.host+'/Admin/adminHome';
+                                  request.open("PUT", url);
+                                  request.send(formData);
+                                }
+
+          </script>
 </html>
+
 
