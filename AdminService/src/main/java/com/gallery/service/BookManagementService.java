@@ -50,7 +50,7 @@ public class BookManagementService {
         input.fields.put("name",name);
         }
 
-        if (pdfSize!=0){
+        if (pdfSize>100){
             System.out.println(pdfSize);
             String key = getFileKey(id);
             uploadtoS3(pdf,key);
