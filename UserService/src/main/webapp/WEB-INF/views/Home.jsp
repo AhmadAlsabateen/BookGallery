@@ -63,7 +63,7 @@
                 <td><%=book.author.name%></td>
                 <td><%=book.category.name%></td>
                 <td><%=book.name%></td>
-                <td><td><input data-id="<%=book.id%>" type="button" value="download" onClick="downloadBook(this)"></td></td>
+                <td><input data-id="<%=book.id%>" type="button" value="download" onClick="downloadBook(this)"></td>
             </tr>
             <%}%>
         </table>
