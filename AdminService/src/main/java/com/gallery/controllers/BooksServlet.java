@@ -67,8 +67,6 @@ public class BooksServlet extends HttpServlet {
 
     @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) {
-
-
         try {
             if (isUpdateRequest(request)) {
                 BookManagementService bookManagementService=BookManagementService.getInstance();
@@ -88,8 +86,10 @@ public class BooksServlet extends HttpServlet {
     }
 
     @Override
-    public void doDelete(HttpServletRequest request, HttpServletResponse response) {
-
+    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long bookId = Long.parseLong(IOUtils.toString(request.getPart("bookId").getInputStream()));
+        BookManagementService bookManagementService= BookManagementService.getInstance();
+        bookManagementService.deleteBook(bookId);
 
     }
 

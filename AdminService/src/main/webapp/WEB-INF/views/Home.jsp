@@ -143,7 +143,7 @@
                 <td><%=book.name%></td>
                 <td><a data-id="<%=book.id%>" onClick="downloadBook(this)">download</a></td>
                 <td><input id="edit-button" type="button" value="Edit" data-bookid="<%=book.id%>"></td>
-                <td><input type="button" value="Delete" data-bookid="<%=book.id%>"></td>
+                <td><input id="delete-button" type="button" value="Delete" data-bookid="<%=book.id%>"></td>
             </tr>
             <%}%>
         </table>
@@ -240,6 +240,18 @@
                                   request.open("PUT", url);
                                   request.send(formData);
                                 }
+                                var deleteBtn=document.getElementById("delete-button");
+                                 deleteBtn.onclick = function(element) {
+                                 let bookId = deleteBtn.getAttribute('data-bookid');
+                                 console.log(bookId);
+                                 let url =  window.location.protocol + "//" + window.location.host+'/Admin/adminHome?bookId='+bookId;
+                                 let xmlHttp = new XMLHttpRequest();
+                                 var formData = new FormData();
+                                 formData.append("bookId", bookId);
+                                        xmlHttp.open('DELETE', url);
+                                        xmlHttp.send(formData);
+                                        location.reload();
+                                 }
 
           </script>
 </html>

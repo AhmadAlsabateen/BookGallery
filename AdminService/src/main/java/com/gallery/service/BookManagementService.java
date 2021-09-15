@@ -67,6 +67,12 @@ public class BookManagementService {
         return key;
     }
 
+    public void deleteBook(long id){
+        BookDao bookDao = BookDao.getInstance();
+        Filter filter= new Filter();
+        filter.fields.put("id",id);
+        bookDao.delete(filter);
+    }
 
     public void saveBook(String name, String category, String author, InputStream pdf) {
         String fileName = category + " - " + author + " - " + name+".pdf";
