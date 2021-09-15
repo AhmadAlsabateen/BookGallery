@@ -117,7 +117,7 @@
                      <td><input type="text"  name="Category"</td>
                 </tr>
                 <tr colspan="3">
-                     <a id="add-book">AddBook </a>
+                <input  id="add-book" type="button" value="Add book">
                 </tr>
             </table>
           <P><INPUT TYPE="SUBMIT" VALUE="Submit" NAME="B1"></P>
@@ -141,7 +141,7 @@
                 <td><%=book.author.name%></td>
                 <td><%=book.category.name%></td>
                 <td><%=book.name%></td>
-                <td><a data-id="<%=book.id%>" onClick="downloadBook(this)">download</a></td>
+                <td><input data-id="<%=book.id%>" value="download" onClick="downloadBook(this)"></td>
                 <td><input id="edit-button" type="button" value="Edit" data-bookid="<%=book.id%>"></td>
                 <td><input id="delete-button" type="button" value="Delete" data-bookid="<%=book.id%>"></td>
             </tr>
