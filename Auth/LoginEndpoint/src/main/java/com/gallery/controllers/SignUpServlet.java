@@ -30,7 +30,7 @@ public class SignUpServlet extends HttpServlet {
                 request.setAttribute("signUpErrorMessage", "password don't mach password2!!");
                 request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
             }
-            HttpSession session = request.getSession(false);
+            HttpSession session = request.getSession(true);
             session.setAttribute("role", "user");
             response.sendRedirect("/User/userHome");
         } else {
