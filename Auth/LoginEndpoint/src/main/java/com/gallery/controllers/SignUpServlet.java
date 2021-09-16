@@ -32,6 +32,7 @@ public class SignUpServlet extends HttpServlet {
             }
             HttpSession session = request.getSession(true);
             session.setAttribute("role", "user");
+            session.setAttribute("logged",true);
             response.sendRedirect("/User/userHome");
         } else {
             System.out.println("Invalid Sign up request : " +request.getParameterMap().toString());
