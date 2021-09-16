@@ -26,7 +26,7 @@ public class LoginServlet  extends HttpServlet {
         LoginService loginService = LoginService.getInstance();
         try {
             String role = loginService.getRole(request.getParameter("username"), request.getParameter("password"));
-            HttpSession session= request.getSession(false);
+            HttpSession session= request.getSession(true);
             session.setAttribute("role",role);
             session.setAttribute("logged",true);
             if (role.equals("user")){
